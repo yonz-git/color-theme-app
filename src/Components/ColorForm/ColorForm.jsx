@@ -1,4 +1,5 @@
 import ColorInput from "../ColorInput/ColorInput";
+import { uid } from "uid";
 
 export default function ColorForm({
   onSubmitColor,
@@ -11,7 +12,7 @@ export default function ColorForm({
 
     const newColorWithId = {
       ...data,
-      id: crypto.randomUUID(),
+      id: uid(),
     };
     onSubmitColor(newColorWithId);
     event.target.reset();
@@ -37,12 +38,12 @@ export default function ColorForm({
       </label>
       <br />
       <label htmlFor="contrastText">
-        Contrast
+        Contrast Text
         <br />
         <ColorInput id="contrastText" defaultValue={initialData.contrastText} />
       </label>
       <br />
-      <button> Add Color </button>
+      <button style={{ marginTop: "1rem" }}> Add Color </button>
     </form>
   );
 }

@@ -1,6 +1,6 @@
 import "./Color.css";
 
-export default function Color({ color }) {
+export default function Color({ color, onDeleteColor }) {
   return (
     <li id={color.id} className="color-card" style={{ background: color.hex }}>
       <h2 className="color-card-headline">{color.hex}</h2>
@@ -10,6 +10,13 @@ export default function Color({ color }) {
       <p className="color-card-contrast" style={{ color: color.contrastText }}>
         {color.contrastText}
       </p>
+      <button
+        style={{ marginTop: "1rem" }}
+        onClick={() => onDeleteColor(color.id)}
+      >
+        {" "}
+        Delete Color{" "}
+      </button>
     </li>
   );
 }
