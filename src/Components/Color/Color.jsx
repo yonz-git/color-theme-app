@@ -4,13 +4,19 @@ import ColorForm from "../ColorForm/ColorForm";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
   const [showConfirm, setShowConfirm] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  function handleEditSubmit(updatedColor) {
+    onEditColor({ ...updatedColor, id: color.id });
+    setIsEditing(false); // Close form after save
+  }
 
   return (
     <li id={color.id} className="color-card" style={{ background: color.hex }}>
       {showConfirm ? (
-        // Confirmation View
+        // Confirmation View (using toggle method)
         <div className="color-card-confirm">
-          <p className="color-card-highlight">Really delete?</p>
+          <p className="color-card-highlight">Delete?</p>
           <button type="button" onClick={() => onDeleteColor(color.id)}>
             Confirm
           </button>
@@ -18,6 +24,17 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
             Cancel
           </button>
         </div>
+      ) : isEditing ? ( // Task: Display ColorForm when in edit mode
+        <>
+          <ColorForm
+            onAddColor={handleEditSubmit}
+            initialData={color}
+            isUpdateMode={true}
+          />
+          <button type="button" onClick={() => setIsEditing(false)}>
+            Cancel
+          </button>
+        </>
       ) : (
         //standard view
 
@@ -44,6 +61,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
             type="button"
             aria-label={`Edit color: ${color.role}`}
             style={{ marginTop: "1rem" }}
+            onClick={() => setIsEditing(true)}
           >
             Edit
           </button>
