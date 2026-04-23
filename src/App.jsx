@@ -15,21 +15,24 @@ function App() {
   function handleDeleteColor(idToDelete) {
     setColors(colors.filter((color) => color.id !== idToDelete));
   }
+  function handleEditColor(updatedColor) {
+    setColors(
+      colors.map((color) => {
+        // Find the color with the matching ID and replace it with the updated one
+        return color.id === updatedColor.id ? updatedColor : color;
+      }),
+    );
+  }
 
-  //     function handleEditColor(idToEdit) {
-
-  // const [edit, setEdit] = useState("");
-
-  //   }
   return (
     <>
       <h1>Theme Creator</h1>
 
-      <ColorForm className="color-form" onSubmitColor={handleAddColor} />
+      <ColorForm className="color-form" onAddColor={handleAddColor} />
       <div className="colorTheme">
         {colors.length === 0 ? (
           <p className="color-card-highlight">
-            No colors in your theme yet... Start by adding one!!
+            No colors yet... Start by adding one!
           </p>
         ) : (
           <ul>
@@ -42,6 +45,7 @@ function App() {
                   role={color.role}
                   contrastText={color.contrastText}
                   onDeleteColor={handleDeleteColor}
+                  onEditColor={handleEditColor}
                 />
               </li>
             ))}

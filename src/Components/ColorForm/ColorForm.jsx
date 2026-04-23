@@ -3,9 +3,13 @@ import { uid } from "uid";
 import "./ColorForm.css";
 
 export default function ColorForm({
-  //when changed to onAddColor Add color function does not work
-  onSubmitColor,
-  initialData = { role: "your color", hex: "#123456", contrastText: "#ffffff" },
+  onAddColor,
+  initialData = {
+    role: "your color",
+    hex: "#123456",
+    contrastText: "#ffffff",
+  },
+  isUpdateMode = false,
 }) {
   function handleSubmit(event) {
     event.preventDefault();
@@ -14,10 +18,10 @@ export default function ColorForm({
 
     const newColorWithId = {
       ...data,
-      id: uid(),
+      id: isUpdateMode ? initialData.id : uid(),
     };
-    onSubmitColor(newColorWithId);
-    event.target.reset();
+    onAddColor(newColorWithId);
+    if (!isUpdateMode) event.target.reset();
   }
 
   return (
@@ -48,7 +52,7 @@ export default function ColorForm({
         aria-label="Add new color card"
         style={{ marginTop: "1rem" }}
       >
-        Add Color
+        {isUpdateMode ? "Update Color" : "Add Color"}
       </button>
     </form>
   );
