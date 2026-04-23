@@ -11,11 +11,12 @@ export default function Color({ color, onDeleteColor }) {
         {color.contrastText}
       </p>
       <button
+        type="button"
+        aria-label={`Delete color: ${color.role}`}
         style={{ marginTop: "1rem" }}
         onClick={() => onDeleteColor(color.id)}
       >
-        {" "}
-        Delete Color{" "}
+        Delete Color
       </button>
     </li>
   );

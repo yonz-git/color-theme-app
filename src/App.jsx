@@ -20,13 +20,20 @@ function App() {
       <h1>Theme Creator</h1>
       <ColorForm className="color-form" onSubmitColor={handleAddColor} />
       <div className="colorTheme">
-        {colors.map((color) => (
-          <Color
-            key={color.id}
-            color={color}
-            onDeleteColor={handleDeleteColor}
-          />
-        ))}
+        <ul>
+          {colors.map((color) => (
+            <li className="color-form-list" key={color}>
+              <Color
+                id={color.id}
+                color={color}
+                //hex={color.hex}
+                role={color.role}
+                contrastText={color.contrastText}
+                onDeleteColor={handleDeleteColor}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );

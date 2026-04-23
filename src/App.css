@@ -6,3 +6,11 @@ body {
 .color-form {
   padding: 1rem;
 }
+
+.color-form-list {
+  list-style: none;
+}
+
+ul {
+  padding-inline-start: 0;
+}

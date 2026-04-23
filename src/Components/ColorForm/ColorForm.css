@@ -1,0 +1,6 @@
+div.color-form,
+label {
+  display: flex;
+  flex-direction: row;
+  padding-top: 15px;
+}

@@ -1,7 +1,9 @@
 import ColorInput from "../ColorInput/ColorInput";
 import { uid } from "uid";
+import "./ColorForm.css";
 
 export default function ColorForm({
+  //when changed to onAddColor Add color function does not work
   onSubmitColor,
   initialData = { role: "your color", hex: "#123456", contrastText: "#ffffff" },
 }) {
@@ -20,30 +22,34 @@ export default function ColorForm({
 
   return (
     <form className="color-form" onSubmit={handleSubmit}>
-      <label htmlFor="role">
-        Role
-        <br />
+      <div className="color-role-input">
+        <label htmlFor="role">Role</label>
+
         <input
           type="text"
           id="role"
           name="role"
           defaultValue={initialData.role}
         />
-      </label>
-      <br />
-      <label htmlFor="hex">
-        Hex
-        <br />
+      </div>
+      <div className="color-hex-input">
+        <label htmlFor="hex">Hex </label>
+
         <ColorInput id="hex" defaultValue={initialData.hex} />
-      </label>
-      <br />
-      <label htmlFor="contrastText">
-        Contrast Text
-        <br />
+      </div>
+
+      <div className="color-contrastText-input">
+        <label htmlFor="contrastText">Contrast Text </label>
+
         <ColorInput id="contrastText" defaultValue={initialData.contrastText} />
-      </label>
-      <br />
-      <button style={{ marginTop: "1rem" }}> Add Color </button>
+      </div>
+      <button
+        type="submit"
+        aria-label="Add new color card"
+        style={{ marginTop: "1rem" }}
+      >
+        Add Color
+      </button>
     </form>
   );
 }
