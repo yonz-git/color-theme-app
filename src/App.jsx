@@ -32,7 +32,7 @@ function App() {
 
   const handleDeleteTheme = (id) => {
     if (id === "t1") return;
-    setThemes(themes.filter((t) => t.id !== id));
+    setThemes(themes.filter((theme) => theme.id !== id));
     setActiveThemeId("t1");
   };
 
@@ -42,7 +42,6 @@ function App() {
   }, [colors, themes]);
 
   function handleAddColor(newColor) {
-    // setColors([newColor, ...colors]);
     setColors((prevColors) => [newColor, ...prevColors]);
 
     setThemes((prevThemes) =>
@@ -102,6 +101,7 @@ function App() {
               <div className="color-form-list" key={color.id}>
                 <Color
                   id={color.id}
+                  hex={color.hex}
                   color={color}
                   onDeleteColor={handleDeleteColor}
                   onEditColor={handleEditColor}

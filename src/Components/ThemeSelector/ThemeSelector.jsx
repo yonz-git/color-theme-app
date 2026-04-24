@@ -11,7 +11,7 @@ export default function ThemeSelector({
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState("");
 
-  const activeTheme = themes.find((t) => t.id === activeThemeId);
+  const activeTheme = themes.find((theme) => theme.id === activeThemeId);
   const isDefault = activeThemeId === "t1";
 
   function handleEditClick() {
