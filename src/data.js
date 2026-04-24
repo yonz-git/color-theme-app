@@ -6,7 +6,7 @@ export const initialThemes = [
   },
   {
     id: "t2",
-    name: "2nd Theme",
+    name: "Second Theme",
     colors: ["c10", "c11", "c12"],
   },
 ];

@@ -12,6 +12,8 @@ function App() {
     const savedColors = localStorage.getItem("colors");
     return savedColors ? JSON.parse(savedColors) : initialColors;
   });
+  // code executed only at very first time using lazy initializer () => { ... } so that it does not have to check localstorage at every render
+
   const [themes, setThemes] = useState(() => {
     const savedThemes = localStorage.getItem("themes");
     return savedThemes ? JSON.parse(savedThemes) : initialThemes;
