@@ -20,7 +20,8 @@ function App() {
   });
   const [activeThemeId, setActiveThemeId] = useState(themes[0].id);
 
-  const activeTheme = themes.find((t) => t.id === activeThemeId) || themes[0];
+  const activeTheme =
+    themes.find((theme) => theme.id === activeThemeId) || themes[0];
   const activeColors = colors.filter((c) => activeTheme.colors.includes(c.id));
 
   const handleAddTheme = () => {
@@ -69,6 +70,14 @@ function App() {
     );
   }
 
+  function handleUpdateTheme(id, newName) {
+    setThemes((prevThemes) =>
+      prevThemes.map((theme) =>
+        theme.id === id ? { ...theme, name: newName } : theme,
+      ),
+    );
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
@@ -78,6 +87,7 @@ function App() {
         onSelect={setActiveThemeId}
         onAdd={handleAddTheme}
         onDelete={() => handleDeleteTheme(activeThemeId)}
+        onUpdate={handleUpdateTheme}
       />
 
       <ColorForm className="color-form" onAddColor={handleAddColor} />
