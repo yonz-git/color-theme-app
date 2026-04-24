@@ -20,8 +20,12 @@ export default function ColorForm({
       ...data,
       id: isUpdateMode ? initialData.id : uid(),
     };
+
     onAddColor(newColorWithId);
-    if (!isUpdateMode) event.target.reset();
+    if (!isUpdateMode) {
+      event.target.reset();
+      event.target.elements.role.focus();
+    }
   }
 
   return (
@@ -33,19 +37,25 @@ export default function ColorForm({
           type="text"
           id="role"
           name="role"
-          defaultValue={initialData.role}
+          defaultValue={isUpdateMode ? initialData.role : ""}
+          placeholder="some color"
+          required
         />
       </div>
       <div className="color-hex-input">
         <label htmlFor="hex">Hex </label>
 
-        <ColorInput id="hex" defaultValue={initialData.hex} />
+        <ColorInput id="hex" name="hex" defaultValue={initialData.hex} />
       </div>
 
       <div className="color-contrastText-input">
         <label htmlFor="contrastText">Contrast Text </label>
 
-        <ColorInput id="contrastText" defaultValue={initialData.contrastText} />
+        <ColorInput
+          id="contrastText"
+          name="contrastText"
+          defaultValue={initialData.contrastText}
+        />
       </div>
       <button
         type="submit"
