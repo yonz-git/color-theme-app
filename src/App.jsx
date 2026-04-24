@@ -48,9 +48,6 @@ function App() {
                 <Color
                   id={color.id}
                   color={color}
-                  //hex={color.hex}
-                  role={color.role}
-                  contrastText={color.contrastText}
                   onDeleteColor={handleDeleteColor}
                   onEditColor={handleEditColor}
                 />

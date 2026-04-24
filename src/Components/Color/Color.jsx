@@ -1,11 +1,43 @@
 import "./Color.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ColorForm from "../ColorForm/ColorForm";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [a11yScore, setA11yScore] = useState(null);
+
+  //
+
+  useEffect(() => {
+    async function checkContrast() {
+      try {
+        const response = await fetch(
+          "https://www.aremycolorsaccessible.com/api/are-they",
+          {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify({ colors: [color.hex, color.contrastText] }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+
+        if (!response.ok) return;
+
+        const data = await response.json();
+
+        setA11yScore(data.overall);
+      } catch (error) {
+        console.error("Contrast API Error:", error);
+      }
+    }
+
+    checkContrast();
+  }, [color.hex, color.contrastText]);
+  //
 
   function handleEditSubmit(updatedColor) {
     onEditColor({ ...updatedColor, id: color.id });
@@ -42,6 +74,9 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
         <>
           <h2 className="color-card-headline">{color.hex}</h2>
           <CopyToClipboard hexCode={color.hex} />
+          <div className="a11y-badge">
+            Overall Contrast: <strong>{a11yScore || "Loading..."}</strong>
+          </div>
           <p className="color-card-role" style={{ color: color.contrastText }}>
             {color.role}
           </p>
